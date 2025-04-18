@@ -156,7 +156,16 @@
       }
     </style>
 <script type="module">
-  import { sdk } from 'https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk@latest/dist/sdk.esm.min.js';
+  import { sdk } from 'https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk@0.0.4/dist/sdk.esm.min.js';
+
+  window.addEventListener('load', async () => {
+    try {
+      await sdk.actions.ready({ disableNativeGestures: true });
+    } catch (err) {
+      console.error("Failed to call sdk.actions.ready:", err);
+    }
+  });
+</script>
 
   window.addEventListener('load', async () => {
     try {
