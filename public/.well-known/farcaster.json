@@ -1,15 +1,17 @@
 {
+  "accountAssociation": {
+    "header": "eyJmaWQiOjM1Nzg5NywidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweGRjOGE4RkFDQjk0OEUwZUQ1M0ZhQjk0YjUwMjIyNTkzNWNhQzM0MjQifQ",
+    "payload": "eyJkb21haW4iOiJ0aWN0YWN0b2UuYml6YXJyZWJlYXN0cy5pbyJ9",
+    "signature": "MHg4OGUzZTBhYTRhMDJhOTI3NDkzZWNmODcxMzUxNGM3NzYzNzZiZGQ3MjY1YjdjMzEwNmM0ZjI4OTE4NmEzNDg4N2M5M2ZhYjY0ZDc1YjhiN2Q1MDFkNWIxYmZkYjU5MWI0ZTFlN2I3NTZiNGNhNjZkMWE3OWQ2YjA2MDZjMTU2NDFi"
+  },
   "frame": {
     "version": "1",
-    "name": "BizarreBeasts TicTacToe",
+    "name": "BizarreBeasts Tic Tac Toe",
     "homeUrl": "https://tictactoe.bizarrebeasts.io",
-    "iconUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe%20bizarrebeasts-qb9B9kShbCs5vWwIrUXgkM1E29lDf8.png?gPsW",
-    "splashImageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe%20bizarrebeasts-qb9B9kShbCs5vWwIrUXgkM1E29lDf8.png?gPsW",
-    "splashBackgroundColor": "#000000",
-    "subtitle": "Play Tic Tac Toe vs AI",
-    "description": "Choose your beast and rack up a high score!!",
-    "primaryCategory": "games",
-    "tags": ["tic", "tac", "toe", "game", "bizarrebeasts"],
-    "heroImageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe%20bizarrebeasts-qb9B9kShbCs5vWwIrUXgkM1E29lDf8.png?gPsW"
+    "iconUrl": "https://tictactoe.bizarrebeasts.io/icon.png",
+    "imageUrl": "https://tictactoe.bizarrebeasts.io/image.png",
+    "buttonTitle": "Play Now",
+    "splashImageUrl": "https://tictactoe.bizarrebeasts.io/splash.png",
+    "splashBackgroundColor": "#000000"
   }
 }
