@@ -1,13 +1,3 @@
 {
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Content-Security-Policy",
-          "value": "frame-ancestors https://warpcast.com"
-        }
-      ]
-    }
-  ]
+  "headers": []
 }
