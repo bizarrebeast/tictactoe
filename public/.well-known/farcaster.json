@@ -1,0 +1,15 @@
+{
+  "frame": {
+    "version": "1",
+    "name": "BizarreBeasts TicTacToe",
+    "homeUrl": "https://tictactoe.bizarrebeasts.io",
+    "iconUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe%20bizarrebeasts-qb9B9kShbCs5vWwIrUXgkM1E29lDf8.png?gPsW",
+    "splashImageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe%20bizarrebeasts-qb9B9kShbCs5vWwIrUXgkM1E29lDf8.png?gPsW",
+    "splashBackgroundColor": "#000000",
+    "subtitle": "Play Tic Tac Toe vs AI",
+    "description": "Choose your beast and rack up a high score!!",
+    "primaryCategory": "games",
+    "tags": ["tic", "tac", "toe", "game", "bizarrebeasts"],
+    "heroImageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe%20bizarrebeasts-qb9B9kShbCs5vWwIrUXgkM1E29lDf8.png?gPsW"
+  }
+}
