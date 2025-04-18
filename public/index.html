@@ -212,9 +212,20 @@ let playerTurn = true;
 let board = Array(9).fill(null);
 let score = 0;
 
-const gridSize = 500;
-canvas.width = canvas.height = gridSize * window.devicePixelRatio;
-ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+// Resize canvas to fit device screen
+function resizeCanvas() {
+  const ratio = window.devicePixelRatio || 1;
+  const size = Math.min(window.innerWidth, window.innerHeight);
+  canvas.width = canvas.height = size * ratio;
+  canvas.style.width = canvas.style.height = size + "px";
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+}
+
+// Call it before anything renders
+resizeCanvas();
+
+// Update canvas size if screen is resized
+window.addEventListener("resize", resizeCanvas);
 
 const showScreen = (screen) => {
   document.querySelectorAll(".screen").forEach((s) => s.classList.add("hidden"));
