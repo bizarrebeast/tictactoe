@@ -165,6 +165,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk@latest/dist/sdk.umd.min.js"></script>
 <script>
+window.addEventListener("DOMContentLoaded", async () => {
+  if (window.sdk?.actions?.ready) {
+    await window.sdk.actions.ready({ disableNativeGestures: true });
+  }
+});
       const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const splash = document.getElementById("splash");
@@ -350,7 +355,7 @@ canvas.addEventListener("click", handleTap);
 
 setTimeout(() => splash.addEventListener("click", () => showScreen(characterSelect)), 2500);
 
-preloadImages(beasts).then(async (images) => {
+preloadImages(beasts).then((images) => {
   await window.sdk.actions.ready({ disableNativeGestures: true });
   const grid = document.getElementById("character-grid");
   images.forEach((img) => {
