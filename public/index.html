@@ -340,7 +340,11 @@
       };
 
       canvas.addEventListener("click", handleTap);
-      setTimeout(() => splash.addEventListener("click", () => showScreen(characterSelect)), 2500);
+let splashReady = false;
+setTimeout(() => { splashReady = true }, 2500);
+splash.addEventListener("click", () => {
+  if (splashReady) showScreen(characterSelect);
+});
 
       preloadImages(beasts).then((images) => {
         const grid = document.getElementById("character-grid");
