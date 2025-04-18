@@ -254,31 +254,49 @@ const preloadImages = (urls) =>
   );
 
 const drawBoard = () => {
-  ctx.clearRect(0, 0, gridSize, gridSize);
-  ctx.lineWidth = 5;
-  ctx.strokeStyle = "#fff";
-  for (let i = 1; i < 3; i++) {
-    const offset = (gridSize / 3) * i;
-    ctx.beginPath();
-    ctx.moveTo(offset, 0);
-    ctx.lineTo(offset, gridSize);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(0, offset);
-    ctx.lineTo(gridSize, offset);
-    ctx.stroke();
-  }
+const size = canvas.width / window.devicePixelRatio;
+ctx.clearRect(0, 0, size, size);
+ctx.lineWidth = 5;
+ctx.strokeStyle = "#fff";
+for (let i = 1; i < 3; i++) {
+  const offset = (size / 3) * i;
+  ctx.beginPath();
+  ctx.moveTo(offset, 0);
+  ctx.lineTo(offset, size);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(0, offset);
+  ctx.lineTo(size, offset);
+  ctx.stroke();
+}
 };
 
 const drawPieces = () => {
+  const size = canvas.width / window.devicePixelRatio;
+  const cellSize = size / 3;
+  const padding = 10;
+
   for (let i = 0; i < board.length; i++) {
-    const x = (i % 3) * (gridSize / 3);
-    const y = Math.floor(i / 3) * (gridSize / 3);
-    const padding = 10;
-    if (board[i] === "player" && playerImg)
-      ctx.drawImage(playerImg, x + padding, y + padding, gridSize / 3 - padding * 2, gridSize / 3 - padding * 2);
-    else if (board[i] === "ai" && aiImg)
-      ctx.drawImage(aiImg, x + padding, y + padding, gridSize / 3 - padding * 2, gridSize / 3 - padding * 2);
+    const x = (i % 3) * cellSize;
+    const y = Math.floor(i / 3) * cellSize;
+
+    if (board[i] === "player" && playerImg) {
+      ctx.drawImage(
+        playerImg,
+        x + padding,
+        y + padding,
+        cellSize - padding * 2,
+        cellSize - padding * 2
+      );
+    } else if (board[i] === "ai" && aiImg) {
+      ctx.drawImage(
+        aiImg,
+        x + padding,
+        y + padding,
+        cellSize - padding * 2,
+        cellSize - padding * 2
+      );
+    }
   }
 };
 
