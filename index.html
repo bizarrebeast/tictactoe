@@ -355,7 +355,7 @@ canvas.addEventListener("click", handleTap);
 
 setTimeout(() => splash.addEventListener("click", () => showScreen(characterSelect)), 2500);
 
-preloadImages(beasts).then((images) => {
+preloadImages(beasts).then(async (images) => {
   await window.sdk.actions.ready({ disableNativeGestures: true });
   const grid = document.getElementById("character-grid");
   images.forEach((img) => {
