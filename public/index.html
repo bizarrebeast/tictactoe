@@ -185,11 +185,11 @@
       <div id="popup" class="popup hidden"></div>
 
       <div class="screen hidden" id="gameOverScreen">
-        <div class="title">Game Over</div>
-        <div class="instructions">Final Score: <span id="finalScore">0</span></div>
-        <button onclick="restartGame()" class="custom-button">Play Again</button>
-      </div>
-    </div>
+  <div class="title">You Lost!</div>
+  <div class="instructions">Better luck next time. Final Score: <span id="finalScore">0</span></div>
+  <button onclick="restartGame()" class="custom-button">Play Again</button>
+</div>
+
 
     <!-- 🧠 GAME SCRIPT -->
     <script>
@@ -297,7 +297,7 @@
         board[move] = "ai";
         render();
         if (checkWin("ai")) endGame();
-        else if (board.every(Boolean)) { score += 1000; showPopup("Draw!", resetBoard); }
+        else if (board.every(Boolean)) { showPopup("Draw!", resetBoard); }
         else playerTurn = true;
       };
 
@@ -311,7 +311,7 @@
           board[index] = "player";
           render();
           if (checkWin("player")) { score += 1000; showPopup("You Win!", resetBoard); }
-          else if (board.every(Boolean)) { score += 1000; showPopup("Draw!", resetBoard); }
+          else if (board.every(Boolean)) { showPopup("Draw!", resetBoard); }
           else { playerTurn = false; setTimeout(aiMove, 500); }
         }
       };
