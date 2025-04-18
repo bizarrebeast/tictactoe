@@ -10,21 +10,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="fc:frame" content='{
-  "version": "next",
-  "imageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/preview%20banner-tIfxma5ogYUKuQCFmbYyIsqqAr9KgH.png?NDOz",
-  "button": {
-    "title": "Play Now",
-    "action": {
-      "type": "launch_frame",
-      "name": "TicTacToe",
-      "url": "https://tictactoe.bizarrebeasts.io/",
-      "splashImageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe_varied_match_3-FSsOQqC2S4QtOEPdXTjeUyoHsTHJ2N.png?UHLA",
-      "splashBackgroundColor": "#000000"
-    }
-  }
-}' />
+      "version": "next",
+      "imageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/preview%20banner-tIfxma5ogYUKuQCFmbYyIsqqAr9KgH.png?NDOz",
+      "button": {
+        "title": "Play Now",
+        "action": {
+          "type": "launch_frame",
+          "name": "TicTacToe",
+          "url": "https://tictactoe.bizarrebeasts.io/",
+          "splashImageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe_varied_match_3-FSsOQqC2S4QtOEPdXTjeUyoHsTHJ2N.png?UHLA",
+          "splashBackgroundColor": "#000000"
+        }
+      }
+    }' />
 
-<title>BizarreBeasts Tic Tac Toe</title>
+    <title>BizarreBeasts Tic Tac Toe</title>
 
     <!-- Fonts & Styles -->
     <style>
@@ -89,22 +89,20 @@
         font-family: "CardenioModernBold";
         text-align: center;
       }
-#character-select {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* Moves content up */
-  padding-top: 2rem;
-  gap: 2rem;
-}
-
-.character-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  max-width: 80vw;
-}
-
+      #character-select {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 2rem;
+        gap: 2rem;
+      }
+      .character-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        max-width: 80vw;
+      }
       .character-grid img {
         width: 30vw;
         max-width: 120px;
@@ -155,40 +153,26 @@
         cursor: pointer;
       }
     </style>
-<script type="module">
-  import { sdk } from 'https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk@0.0.4/dist/sdk.esm.min.js';
 
-  window.addEventListener('load', async () => {
-    try {
-      await sdk.actions.ready({ disableNativeGestures: true });
-    } catch (err) {
-      console.error("Failed to call sdk.actions.ready:", err);
-    }
-  });
-</script>
-
-  window.addEventListener('load', async () => {
-    try {
-      await sdk.actions.ready({ disableNativeGestures: true });
-    } catch (err) {
-      console.error("Failed to call sdk.actions.ready:", err);
-    }
-  });
-</script>
+    <!-- ✅ Farcaster SDK (UMD version) -->
+    <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk@0.0.4/dist/sdk.umd.js"></script>
+    <script>
+      window.addEventListener("load", async () => {
+        try {
+          await window.sdk.actions.ready({ disableNativeGestures: true });
+        } catch (err) {
+          console.error("Failed to call sdk.actions.ready:", err);
+        }
+      });
+    </script>
   </head>
+
   <body>
     <div id="app">
       <div class="screen" id="splash">
         <div class="title">BizarreBeasts:<br />Tic Tac Toe</div>
-        <img
-          class="splash-image"
-          src="https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe_varied_match_3-FSsOQqC2S4QtOEPdXTjeUyoHsTHJ2N.png?UHLA"
-          alt="BizarreBeasts Title Graphic"
-          style="border: none"
-        />
-        <div class="instructions">
-          Try to win as many rounds of Tic Tac Toe as you can before losing! Tap anywhere to continue.
-        </div>
+        <img class="splash-image" src="https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe_varied_match_3-FSsOQqC2S4QtOEPdXTjeUyoHsTHJ2N.png?UHLA" alt="BizarreBeasts Title Graphic" style="border: none" />
+        <div class="instructions">Try to win as many rounds of Tic Tac Toe as you can before losing! Tap anywhere to continue.</div>
       </div>
 
       <div class="screen hidden" id="character-select">
@@ -207,235 +191,169 @@
       </div>
     </div>
 
-<script>
+    <!-- 🧠 GAME SCRIPT -->
+    <script>
       const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-const splash = document.getElementById("splash");
-const characterSelect = document.getElementById("character-select");
-const scoreDisplay = document.getElementById("scoreDisplay");
-const popup = document.getElementById("popup");
+      const ctx = canvas.getContext("2d");
+      const splash = document.getElementById("splash");
+      const characterSelect = document.getElementById("character-select");
+      const scoreDisplay = document.getElementById("scoreDisplay");
+      const popup = document.getElementById("popup");
 
-const beasts = [
-  "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Hans-OAXWtCbkat7EfPoWL65bZMTgOhzVOl.jpeg?6q5R",
-  "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Cecil-lPbxki2lRik6ZA67tiz2u6fcr9C8Cs.jpeg?c4OD",
-  "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Calzone-eZ4my9Pxrui0wIE880EtDBmFRl1OrZ.jpeg?E3lA",
-  "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Leon-MxLY1PzkCONNIovsnvG891fppL6qMF.jpeg?jygv",
-  "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Lester-nutNt8h4uK2RgDgMOmVfSxE7VDps0d.jpeg?2pGu",
-  "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Raymond-M8tWDjyZwYAmOHfSCjkLJ66VY9I9Mc.jpeg?C6do"
-];
+      const beasts = [
+        "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Hans-OAXWtCbkat7EfPoWL65bZMTgOhzVOl.jpeg?6q5R",
+        "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Cecil-lPbxki2lRik6ZA67tiz2u6fcr9C8Cs.jpeg?c4OD",
+        "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Calzone-eZ4my9Pxrui0wIE880EtDBmFRl1OrZ.jpeg?E3lA",
+        "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Leon-MxLY1PzkCONNIovsnvG891fppL6qMF.jpeg?jygv",
+        "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Lester-nutNt8h4uK2RgDgMOmVfSxE7VDps0d.jpeg?2pGu",
+        "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/BizarreBeasts%20Tic%20Tac%20Toe%20-%20Raymond-M8tWDjyZwYAmOHfSCjkLJ66VY9I9Mc.jpeg?C6do"
+      ];
 
-let playerImg = null;
-let aiImg = null;
-let playerTurn = true;
-let board = Array(9).fill(null);
-let score = 0;
+      let playerImg = null;
+      let aiImg = null;
+      let playerTurn = true;
+      let board = Array(9).fill(null);
+      let score = 0;
 
-// Resize canvas to fit device screen
-function resizeCanvas() {
-  const ratio = window.devicePixelRatio || 1;
-  const size = Math.min(window.innerWidth, window.innerHeight);
-  canvas.width = canvas.height = size * ratio;
-  canvas.style.width = canvas.style.height = size + "px";
-  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-}
+      function resizeCanvas() {
+        const ratio = window.devicePixelRatio || 1;
+        const size = Math.min(window.innerWidth, window.innerHeight);
+        canvas.width = canvas.height = size * ratio;
+        canvas.style.width = canvas.style.height = size + "px";
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      }
 
-// Call it before anything renders
-resizeCanvas();
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
 
-// Update canvas size if screen is resized
-window.addEventListener("resize", resizeCanvas);
+      const showScreen = (screen) => {
+        document.querySelectorAll(".screen").forEach((s) => s.classList.add("hidden"));
+        screen.classList.remove("hidden");
+      };
 
-const showScreen = (screen) => {
-  document.querySelectorAll(".screen").forEach((s) => s.classList.add("hidden"));
-  screen.classList.remove("hidden");
-};
+      const showPopup = (text, callback) => {
+        popup.textContent = text;
+        popup.classList.remove("hidden");
+        setTimeout(() => {
+          popup.classList.add("hidden");
+          if (callback) callback();
+        }, 1000);
+      };
 
-const showPopup = (text, callback) => {
-  popup.textContent = text;
-  popup.classList.remove("hidden");
-  setTimeout(() => {
-    popup.classList.add("hidden");
-    if (callback) callback();
-  }, 1000);
-};
+      const preloadImages = (urls) => Promise.all(urls.map((url) => new Promise((res) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => res(img);
+      })));
 
-const preloadImages = (urls) =>
-  Promise.all(
-    urls.map(
-      (url) =>
-        new Promise((resolve) => {
-          const img = new Image();
-          img.src = url;
-          img.onload = () => resolve(img);
-        })
-    )
-  );
+      const drawBoard = () => {
+        const size = canvas.width / window.devicePixelRatio;
+        ctx.clearRect(0, 0, size, size);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "#fff";
+        for (let i = 1; i < 3; i++) {
+          const offset = (size / 3) * i;
+          ctx.beginPath();
+          ctx.moveTo(offset, 0);
+          ctx.lineTo(offset, size);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(0, offset);
+          ctx.lineTo(size, offset);
+          ctx.stroke();
+        }
+      };
 
-const drawBoard = () => {
-const size = canvas.width / window.devicePixelRatio;
-ctx.clearRect(0, 0, size, size);
-ctx.lineWidth = 5;
-ctx.strokeStyle = "#fff";
-for (let i = 1; i < 3; i++) {
-  const offset = (size / 3) * i;
-  ctx.beginPath();
-  ctx.moveTo(offset, 0);
-  ctx.lineTo(offset, size);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(0, offset);
-  ctx.lineTo(size, offset);
-  ctx.stroke();
-}
-};
+      const drawPieces = () => {
+        const size = canvas.width / window.devicePixelRatio;
+        const cellSize = size / 3;
+        const padding = 10;
+        for (let i = 0; i < board.length; i++) {
+          const x = (i % 3) * cellSize;
+          const y = Math.floor(i / 3) * cellSize;
+          const img = board[i] === "player" ? playerImg : board[i] === "ai" ? aiImg : null;
+          if (img) ctx.drawImage(img, x + padding, y + padding, cellSize - padding * 2, cellSize - padding * 2);
+        }
+      };
 
-const drawPieces = () => {
-  const size = canvas.width / window.devicePixelRatio;
-  const cellSize = size / 3;
-  const padding = 10;
+      const checkWin = (mark) => {
+        const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+        return lines.some((line) => line.every((i) => board[i] === mark));
+      };
 
-  for (let i = 0; i < board.length; i++) {
-    const x = (i % 3) * cellSize;
-    const y = Math.floor(i / 3) * cellSize;
+      const aiMove = () => {
+        const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+        const findWinningMove = (mark) => {
+          for (let line of lines) {
+            const [a, b, c] = line;
+            const marks = [board[a], board[b], board[c]];
+            const empty = line.find((i) => board[i] === null);
+            if (marks.filter((m) => m === mark).length === 2 && empty !== undefined) return empty;
+          }
+          return null;
+        };
+        const empty = board.map((v, i) => v === null ? i : null).filter((v) => v !== null);
+        let move = findWinningMove("ai") ?? findWinningMove("player") ?? empty[Math.floor(Math.random() * empty.length)];
+        board[move] = "ai";
+        render();
+        if (checkWin("ai")) endGame();
+        else if (board.every(Boolean)) { score += 1000; showPopup("Draw!", resetBoard); }
+        else playerTurn = true;
+      };
 
-    if (board[i] === "player" && playerImg) {
-      ctx.drawImage(
-        playerImg,
-        x + padding,
-        y + padding,
-        cellSize - padding * 2,
-        cellSize - padding * 2
-      );
-    } else if (board[i] === "ai" && aiImg) {
-      ctx.drawImage(
-        aiImg,
-        x + padding,
-        y + padding,
-        cellSize - padding * 2,
-        cellSize - padding * 2
-      );
-    }
-  }
-};
+      const handleTap = (e) => {
+        if (!playerTurn) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const index = Math.floor(y / (rect.height / 3)) * 3 + Math.floor(x / (rect.width / 3));
+        if (board[index] === null) {
+          board[index] = "player";
+          render();
+          if (checkWin("player")) { score += 1000; showPopup("You Win!", resetBoard); }
+          else if (board.every(Boolean)) { score += 1000; showPopup("Draw!", resetBoard); }
+          else { playerTurn = false; setTimeout(aiMove, 500); }
+        }
+      };
 
-const checkWin = (mark) => {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  return lines.some((line) => line.every((i) => board[i] === mark));
-};
+      const render = () => {
+        drawBoard();
+        drawPieces();
+        scoreDisplay.textContent = `Score: ${score}`;
+      };
 
-const aiMove = () => {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  const findWinningMove = (mark) => {
-    for (let line of lines) {
-      const [a, b, c] = line;
-      const marks = [board[a], board[b], board[c]];
-      const count = marks.filter((m) => m === mark).length;
-      const emptyIndex = line.find((i) => board[i] === null);
-      if (count === 2 && emptyIndex !== undefined) return emptyIndex;
-    }
-    return null;
-  };
+      const resetBoard = () => {
+        board = Array(9).fill(null);
+        playerTurn = true;
+        render();
+      };
 
-  const empty = board.map((v, i) => (v === null ? i : null)).filter((v) => v !== null);
-  let move = findWinningMove("ai");
-  if (move === null) move = findWinningMove("player");
-  if (move === null) move = empty[Math.floor(Math.random() * empty.length)];
+      const endGame = () => {
+        document.getElementById("finalScore").textContent = score;
+        showScreen(document.getElementById("gameOverScreen"));
+      };
 
-  board[move] = "ai";
-  render();
-  if (checkWin("ai")) {
-    endGame();
-  } else if (board.every((cell) => cell)) {
-    score += 1000;
-    showPopup("Draw!", resetBoard);
-  } else {
-    playerTurn = true;
-  }
-};
+      const restartGame = () => {
+        score = 0;
+        resetBoard();
+        showScreen(characterSelect);
+      };
 
-const handleTap = (e) => {
-  if (!playerTurn) return;
-  const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  const cellX = Math.floor(x / (rect.width / 3));
-  const cellY = Math.floor(y / (rect.height / 3));
-  const index = cellY * 3 + cellX;
-  if (board[index] === null) {
-    board[index] = "player";
-    render();
-    if (checkWin("player")) {
-      score += 1000;
-      showPopup("You Win!", resetBoard);
-    } else if (board.every((cell) => cell)) {
-      score += 1000;
-      showPopup("Draw!", resetBoard);
-    } else {
-      playerTurn = false;
-      setTimeout(aiMove, 500);
-    }
-  }
-};
+      canvas.addEventListener("click", handleTap);
+      setTimeout(() => splash.addEventListener("click", () => showScreen(characterSelect)), 2500);
 
-const render = () => {
-  drawBoard();
-  drawPieces();
-  scoreDisplay.innerText = `Score: ${score}`;
-};
-
-const resetBoard = () => {
-  board = Array(9).fill(null);
-  playerTurn = true;
-  render();
-};
-
-const endGame = () => {
-  document.getElementById("finalScore").textContent = score;
-  showScreen(document.getElementById("gameOverScreen"));
-};
-
-const restartGame = () => {
-  score = 0;
-  resetBoard();
-  showScreen(characterSelect);
-};
-
-canvas.addEventListener("click", handleTap);
-
-setTimeout(() => splash.addEventListener("click", () => showScreen(characterSelect)), 2500);
-
-preloadImages(beasts).then(async (images) => {
-
-  const grid = document.getElementById("character-grid");
-  images.forEach((img) => {
-img.addEventListener("click", () => {
-  playerImg = img;
-  aiImg = images.find((b) => b !== img);
-  document.querySelectorAll(".screen").forEach((s) => s.classList.add("hidden")); // Hide screens
-  resetBoard(); // Just start the game
-});
-
-    grid.appendChild(img);
-  });
-});
+      preloadImages(beasts).then((images) => {
+        const grid = document.getElementById("character-grid");
+        images.forEach((img) => {
+          img.addEventListener("click", () => {
+            playerImg = img;
+            aiImg = images.find((b) => b !== img);
+            showScreen(document.createElement("div"));
+            resetBoard();
+          });
+          grid.appendChild(img);
+        });
+      });
     </script>
   </body>
 </html>
