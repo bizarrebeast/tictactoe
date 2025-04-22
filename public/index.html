@@ -154,24 +154,26 @@
       }
     </style>
 
-    <!-- ✅ Farcaster SDK (UMD version) -->
+<!-- ✅ Farcaster SDK (UMD version) -->
 <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk@0.0.4/dist/sdk.umd.js"></script>
 <script>
-  window.addEventListener("load", () => {
-    const checkSDK = setInterval(() => {
+  if (window.sdk?.actions?.ready) {
+    window.sdk.actions.ready({ disableNativeGestures: true })
+      .then(() => console.log("✅ Farcaster SDK ready"))
+      .catch((err) => console.error("❌ Failed to call sdk.actions.ready:", err));
+  } else {
+    console.warn("⚠️ sdk.actions.ready not found yet. Will retry...");
+    const retryReady = setInterval(() => {
       if (window.sdk?.actions?.ready) {
-        clearInterval(checkSDK);
+        clearInterval(retryReady);
         window.sdk.actions.ready({ disableNativeGestures: true })
-          .then(() => {
-            console.log("Farcaster SDK ready");
-          })
-          .catch((err) => {
-            console.error("Failed to call sdk.actions.ready:", err);
-          });
+          .then(() => console.log("✅ Farcaster SDK ready (retry)"))
+          .catch((err) => console.error("❌ Retry failed:", err));
       }
     }, 50);
-  });
+  }
 </script>
+
   </head>
 
   <body>
