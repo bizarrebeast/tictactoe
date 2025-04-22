@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- OpenGraph for Farcaster Preview -->
-    <meta property="og:title" content="BizarreBeasts: Tic Tac Toe" />
+    <meta property="og:title" content="BizarreBeasts: TicTacToe" />
     <meta property="og:description" content="Play BizarreBeasts Tic Tac Toe – can you beat the AI and keep your streak alive?" />
     <meta property="og:image" content="https://lqy3lriiybxcejon.public.blob.vercel-storage.com/Emk1p6hBBEu5/tictactoe_varied_match_3-FSsOQqC2S4QtOEPdXTjeUyoHsTHJ2N.png?UHLA" />
     <meta property="og:type" content="website" />
@@ -155,16 +155,23 @@
     </style>
 
     <!-- ✅ Farcaster SDK (UMD version) -->
-    <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk@0.0.4/dist/sdk.umd.js"></script>
-    <script>
-      window.addEventListener("load", async () => {
-        try {
-          await window.sdk.actions.ready({ disableNativeGestures: true });
-        } catch (err) {
-          console.error("Failed to call sdk.actions.ready:", err);
-        }
-      });
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk@0.0.4/dist/sdk.umd.js"></script>
+<script>
+  window.addEventListener("load", () => {
+    const checkSDK = setInterval(() => {
+      if (window.sdk?.actions?.ready) {
+        clearInterval(checkSDK);
+        window.sdk.actions.ready({ disableNativeGestures: true })
+          .then(() => {
+            console.log("Farcaster SDK ready");
+          })
+          .catch((err) => {
+            console.error("Failed to call sdk.actions.ready:", err);
+          });
+      }
+    }, 50);
+  });
+</script>
   </head>
 
   <body>
